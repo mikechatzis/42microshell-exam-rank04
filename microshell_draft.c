@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
-#include <stdbool.h>
 #include <stdlib.h>
 
 /* last updated 05/05/2022 */
@@ -43,8 +42,8 @@ int main(int argc, char **argv, char **envp)
 		}
 	}
 
-	//define arrays for cmd type (1 for pipe, 0 for anything else) and cmd start index
-	bool type[count];
+	//define arrays for cmd type (1 for pipe, 0 for semicolon) and cmd start index
+	int type[count];
 	size_t pos[count];
 
 	//initialize all types to 0;
