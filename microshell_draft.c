@@ -21,10 +21,7 @@ size_t ft_strlen(char const *s)
 int main(int argc, char **argv, char **envp)
 {
 	if (argc == 1)
-	{
-		write(2, "error: argument\n", 17);
-		return 1;
-	}
+		return write(2, "error: argument\n", 17), 1;
 
 	//calculate number of commands
 	size_t count = 1;
