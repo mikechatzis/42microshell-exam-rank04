@@ -29,12 +29,10 @@ int main(int argc, char **argv, char **envp)
 		if (strcmp(argv[i], "|") || strcmp(argv[i], ";"))
 			continue;
 
-			//skip consecutive ";"
-			while (!strcmp(argv[i], ";"))
-				i++;
-			if (!strcmp(argv[i - 1], ";"))
-				i--;
-		}
+		//skip consecutive ";"
+		while (argv[i] && !strcmp(argv[i], ";"))
+			i++;
+		count++;
 	}
 
 	//define arrays for cmd type (1 for pipe, 0 for semicolon) and cmd start index
