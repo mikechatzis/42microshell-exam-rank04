@@ -10,8 +10,7 @@
 NOTE: The current microshell subject is misleading. The tester will not test cases like: "; cmd ; ;",
 but only well defined simple arguments. That makes our job easier and way faster */
 
-size_t ft_strlen(char const *s)
-{
+size_t ft_strlen(char const *s) {
 	size_t i = 0;
 	while (s[i])
 		i++;
@@ -39,12 +38,6 @@ int main(int argc, char **argv, char **envp)
 	int type[count];
 	size_t pos[count];
 
-	//initialize all types to 0;
-	for (size_t i = 0; i < count; i++)
-		type[i] = 0;
-	//index for the 1st cmd is always 1;
-	pos[0] = 1;
-
 	/* loop through argv and set the indexes to determine where the beginning of each cmd is. NULL every "|"
 	and ";" to serve as delimiters */
 	size_t j = 0;
@@ -61,6 +54,7 @@ int main(int argc, char **argv, char **envp)
 			//once again skip consecutive ";" and also NULL all the ptrs
 			while (!strcmp(argv[i], ";"))
 				argv[i++] = NULL;
+			type[j++] = 0;
 			pos[1 + j++] = i;
 		}
 	}
