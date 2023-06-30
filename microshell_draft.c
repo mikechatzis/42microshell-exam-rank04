@@ -17,8 +17,7 @@ size_t ft_strlen(char const *s) {
 	return i;
 }
 
-int main(int argc, char **argv, char **envp)
-{
+int main(int argc, const char **argv, const char **envp) {
 	if (argc == 1)
 		return write(2, "error: argument\n", 17), 1;
 
@@ -41,16 +40,12 @@ int main(int argc, char **argv, char **envp)
 	/* loop through argv and set the indexes to determine where the beginning of each cmd is. NULL every "|"
 	and ";" to serve as delimiters */
 	size_t j = 0;
-	for (size_t i = 0; argv[i]; i++)
-	{
-		if (!strcmp(argv[i], "|"))
-		{
+	for (size_t i = 1; argv[i]; i++) {
+		if (!strcmp(argv[i], "|")) {
 			pos[j + 1] = i + 1;
 			type[j++] = 1;
 			argv[i] = NULL;
-		}
-		else if (!strcmp(argv[i], ";"))
-		{
+		} else if (!strcmp(argv[i], ";")) {
 			//once again skip consecutive ";" and also NULL all the ptrs
 			while (!strcmp(argv[i], ";"))
 				argv[i++] = NULL;
@@ -69,38 +64,29 @@ int main(int argc, char **argv, char **envp)
 	int fdd = 0;
 	pid_t pid;
 
-	for (size_t i = 0; i < count; i++)
-	{
-		if (!strcmp(argv[pos[i]], "cd"))
-		{
+	for (size_t i = 0; i < count; i++) {
+		if (!strcmp(argv[pos[i]], "cd")) {
 			/* remember, envp follows right after argv in memory, separated by a single NULL ptr:
 			{arg1, arg2, arg3, ... , NULL, name=value1, name=value2, name=value3, ...},
 			so if cd has more than 1 arguments or no arguments, the check below will always return true */
 
 			if (argv[pos[i] + 2])
 				write(2, "error: cd: bad arguments\n", 26);
-			
-			else if (chdir(argv[pos[i] + 1]))
-			{	
+			else if (chdir(argv[pos[i] + 1])) {
 				write(2, "error: cd: cannot change directory to ", 39);
 				write(2, argv[pos[i] + 1], ft_strlen(argv[pos[i] + 1]));
 				write(2, "\n", 1);
 			}
-		}
-		else
-		{
-			if(pipe(fd) == -1)
-			{
+		} else {
+			if (pipe(fd) == -1) {
 				write(2, "error: fatal\n", 14);
 				exit(1);
 			}
-			if ((pid = fork()) == -1)
-			{
+			if ((pid = fork()) == -1) {
 				write(2, "error: fatal\n", 14);
 				exit(1);
 			}
-			if (!pid)
-			{
+			if (!pid) {
 				dup2(fdd, 0);
 				if(type[i] == 1)
 					dup2(fd[1], 1);
@@ -110,9 +96,7 @@ int main(int argc, char **argv, char **envp)
 					write(2, argv[pos[i]], ft_strlen(argv[pos[i]]));
 					write(2, "\n", 1);
 				}
-			}
-			else
-			{
+			} else {
 				waitpid(pid, NULL, 0);
 				close(fd[1]);
 				close(fdd);
