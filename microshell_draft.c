@@ -77,14 +77,8 @@ int main(int argc, const char **argv, const char **envp) {
 				write(2, "\n", 1);
 			}
 		} else {
-			if (pipe(fd) == -1) {
-				write(2, "error: fatal\n", 14);
-				exit(1);
-			}
-			if ((pid = fork()) == -1) {
-				write(2, "error: fatal\n", 14);
-				exit(1);
-			}
+			if (pipe(fd) == -1 || (pid = fork()) == -1)
+				return write(2, "error: fatal\n", 14), 1;
 			if (!pid) {
 				dup2(fdd, 0);
 				if(type[i] == 1)
