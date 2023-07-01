@@ -54,7 +54,7 @@ int main(int argc, const char **argv, const char **envp) {
 	}
 	
 	
-	/* the execve loop, iterating once per cmd and handling pipes accordingly, based on wether a pipe was found or if the cmd is "cd".
+	/* the execve loop, iterating once per cmd and handling pipes accordingly, based on whether a pipe was found or if the cmd is "cd".
 	We can freely pass the entire argv starting from the address of argv[pos[]](the pre-saved cmd start index) to execve, as it will stop
 	at the 1st NULL ptr it encounters. Note that no special treatment for ";" exists. That's because this loop will execute one command per
 	iteration regardless, and will just set pipes accordingly, so input/output is read from/written to the correct fd. */
