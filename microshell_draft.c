@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
-#include <stdlib.h>
 
 /* last updated 05/05/2022 */
 
