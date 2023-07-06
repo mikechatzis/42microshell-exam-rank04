@@ -84,7 +84,7 @@ int main(int argc, const char **argv, const char **envp) {
 				return write(2, "error: fatal\n", 14), 1;
 			if (!pid) {
 				dup2(fdd, 0);
-				if(type[i])
+				if (type[i])
 					dup2(fd[1], 1);
 				if (execve(argv[pos[i]], &argv[pos[i]], envp) == -1)
 				{
