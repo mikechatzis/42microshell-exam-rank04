@@ -38,6 +38,7 @@ int main(int argc, const char **argv, const char **envp) {
 	size_t pos[count];
 
 	pos[0] = 1;
+	type[count - 1] = 0;
 
 	/* loop through argv and set the indexes to determine where the beginning of each cmd is. NULL every "|"
 	and ";" to serve as delimiters */
