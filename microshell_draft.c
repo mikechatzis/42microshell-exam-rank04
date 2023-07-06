@@ -70,7 +70,7 @@ int main(int argc, const char **argv, const char **envp) {
 		if (!strcmp(argv[pos[i]], "cd")) {
 			/* remember, envp follows right after argv in memory, separated by a single NULL ptr:
 			{arg1, arg2, arg3, ... , NULL, name=value1, name=value2, name=value3, ...},
-			so if cd has more than 1 arguments or no arguments, the check below will always return true */
+			so if cd has more than 1 argument or no arguments, the check below will always return true */
 
 			if (argv[pos[i] + 2])
 				write(2, "error: cd: bad arguments\n", 26);
