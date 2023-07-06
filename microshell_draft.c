@@ -22,8 +22,8 @@ int main(int argc, const char **argv, const char **envp) {
 
 	//calculate number of commands
 	size_t count = 1;
-	for (size_t i = 0; argv[i]; i++) {
-		if (strcmp(argv[i], "|") || strcmp(argv[i], ";"))
+	for (size_t i = 1; argv[i]; i++) {
+		if (strcmp(argv[i], "|") && strcmp(argv[i], ";"))
 			continue;
 
 		//skip consecutive ";"
