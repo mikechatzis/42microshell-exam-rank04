@@ -49,9 +49,9 @@ int main(int argc, const char **argv, const char **envp) {
 			argv[i] = NULL;
 		} else if (!strcmp(argv[i], ";")) {
 			//once again skip consecutive ";" and also NULL all the ptrs
-			while (!strcmp(argv[i], ";"))
+			while (i < argc && !strcmp(argv[i], ";"))
 				argv[i++] = NULL;
-			type[j++] = 0;
+			type[j] = 0;
 			pos[1 + j++] = i;
 		}
 	}
