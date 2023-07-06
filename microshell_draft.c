@@ -27,9 +27,10 @@ int main(int argc, const char **argv, const char **envp) {
 			continue;
 
 		//skip consecutive ";"
-		while (argv[i] && !strcmp(argv[i], ";"))
+		while (i < argc - 1 && !strcmp(argv[i], ";") && !strcmp(argv[i + 1], ";"))
 			i++;
-		count++;
+		if (i < argc - 1)
+			count++;
 	}
 
 	//define arrays for cmd type (1 for pipe, 0 for semicolon) and cmd start index
